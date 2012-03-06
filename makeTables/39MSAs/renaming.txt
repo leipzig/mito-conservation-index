@@ -1,0 +1,13 @@
+    8  Mar/05 - 21:12:16 mv ATP6_39_animal_sequences.fasta 22_ATP6.fa
+   10  Mar/05 - 21:12:34 mv ATP8_39_animal_sequences.fasta 21_ATP8.fa
+   11  Mar/05 - 21:13:05 mv CO1_39_animal_sequences.fasta 16_CO1.fa
+   12  Mar/05 - 21:13:26 mv CO2_39_animal_sequences.fasta 19_CO2.fa
+   14  Mar/05 - 21:14:03 mv CO3_39_animal_sequences.fasta 23_CO3.fa
+   16  Mar/05 - 21:14:53 mv ND1_39_animal_sequences.fasta 6_ND1.fa
+   18  Mar/05 - 21:15:14 mv CYTB_39_animal_sequences.fasta 35_CYTB.fa
+   20  Mar/05 - 21:19:05 mv ND2_39_animal_sequences.fasta 10_ND2.fa
+   21  Mar/05 - 21:19:41 mv ND4L_39_animal_sequences.fasta 27_ND4L.fa
+   23  Mar/05 - 21:20:08 mv ND3_39_animal_sequences.fasta 25_ND3.fa
+   24  Mar/05 - 21:20:39 mv ND4_39_animal_sequences.fasta 28_ND4.fa
+   25  Mar/05 - 21:21:01 mv ND5_39_animal_sequences.fasta 32_ND5.fa
+   26  Mar/05 - 21:21:18 mv ND6_39_animal_sequences.fasta 33_ND6.fa
