@@ -6,3 +6,7 @@ tabs : $(tabs)
 
 CI_tables/%.txt : 39MSAs/%.fa
 	echo "filename=\"$<\";outfile=\"$@\";source(\"create_CI_tables.R\");" | R --vanilla
+
+CI_tables/all.txt : $(tabs)
+	perl -e 'print "loci\tcommon\taa_pos\tof39\n"' > $@
+	cat $+ | grep -v loci >> $@
