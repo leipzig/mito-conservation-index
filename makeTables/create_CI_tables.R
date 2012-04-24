@@ -3,12 +3,22 @@
 
 library("Biostrings")
 library("stringr")
+library("ggplot2")
 seqs<-read.AAStringSet(filename)
 str_extract(filename,"([0-9]+)_([A-Za-z0-9]+).fa")
 matches<-str_match(filename,"([0-9]+)_([A-Za-z0-9]+).fa")
 loci<-matches[2]
 commonName<-matches[3]
 seqMatrix<-as.matrix(seqs)
+#i don't care for gaps
+seqMatrix<-seqMatrix[,-which(seqMatrix[1,]=='-')]
 of39<-apply(seqMatrix,2,FUN=function(x){length(which(x==x[1]))})
 df<-data.frame(loci=loci,common=commonName,aa_pos=1:length(of39),of39=of39)
 write.table(df,file=outfile,sep="\t",quote=FALSE,row.names=FALSE)
+confirmRCSlen<-paste(seqMatrix[1,],collapse="")
+write(confirmRCSlen,file=paste('geneSizes/',commonName,':',str_length(confirmRCSlen),'bp',sep=""))
+of39df<-data.frame(x=1:length(of39),y=of39)
+p<-ggplot(data=of39df,aes(x=x,y=y))+geom_bar(stat="identity",position="dodge")+xlab("pos")+ylab("rCRS of 39")+opts(title=commonName)
+X11(type="cairo")
+print(p)
+savePlot(filename=paste("plots/",commonName,".tiff",sep=""),type="tiff")

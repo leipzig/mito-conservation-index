@@ -1,0 +1,1 @@
+for f in *fa; do mv $f `echo $f|sed -e 's/tRNA-//;s/.aln.fa/.fa/'`; done

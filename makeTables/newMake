@@ -1,0 +1,26 @@
+gene_loci := 10_ND2 19_CO2 22_ATP6 25_ND3 28_ND4 33_ND6 6_ND1 16_CO1 21_ATP8 23_CO3 27_ND4L 32_ND5 35_CYTB
+tRNA_loci := Ala Arg Asn Asp Cys Gln Glu Gly His Ile Leu1 Leu2 Lys Met Phe Pro Ser1 Ser2 Thr Trp Tyr Val
+
+gene_MSAs := $(addsuffix .fa,$(addprefix 39MSAs/,$(gene_loci)))
+gene_tabs := $(addsuffix .txt,$(addprefix CI_tables/,$(gene_loci)))
+
+tRNA_MSAs := $(addsuffix .fa,$(addprefix tRNA/fa/,$(tRNA_loci)))
+tRNA_tabs := $(addsuffix .txt,$(addprefix tRNA_tables/,$(tRNA_loci)))
+
+tabs : $(gene_tabs) $(tRNA_tabs)
+
+CI_tables/%.txt : 39MSAs/%.fa
+  echo "filename=\"$<\";outfile=\"$@\";source(\"create_CI_tables.R\");" | R --vanilla
+
+tRNA_tables/%.txt : tRNAs/fa/%.fa
+  echo "filename=\"$<\";outfile=\"$@\";source(\"create_tRNA_tables.R\");" | R --vanilla
+
+CI_tables/all.txt : $(tabs)
+	perl -e 'print "id\tloci\tcommon\taa_pos\tof39\n"' > $@
+	cat $+ | grep -v loci | cat -b | perl -ne 's/^\s+//;print'  >> $@
+
+clean:
+	rm CI_tables/*
+	rm plots/*
+	rm geneSizes/*
+
